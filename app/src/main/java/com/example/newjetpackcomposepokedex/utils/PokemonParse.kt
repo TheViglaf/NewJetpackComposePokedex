@@ -5,8 +5,8 @@ import com.example.newjetpackcomposepokedex.data.remote.responses.Pokemon
 import com.example.newjetpackcomposepokedex.ui.theme.*
 import java.util.*
 
-fun parseTypeToColor(type: Pokemon.Type.Type): Color {
-    return when(type.name.lowercase(Locale.ROOT)) {
+fun parseTypeToColor(type: Pokemon.Type): Color {
+    return when(type.type.name.lowercase(Locale.ROOT)) {
         "normal" -> TypeNormal
         "fire" -> TypeFire
         "water" -> TypeWater
@@ -29,8 +29,8 @@ fun parseTypeToColor(type: Pokemon.Type.Type): Color {
     }
 }
 
-fun parseStatToColor(stat: Pokemon.Stat.Stat): Color {
-    return when(stat.name.lowercase()) {
+fun parseStatToColor(stat: Pokemon.Stat): Color {
+    return when(stat.stat.name.lowercase()) {
         "hp" -> HPColor
         "attack" -> AtkColor
         "defense" -> DefColor
@@ -41,8 +41,8 @@ fun parseStatToColor(stat: Pokemon.Stat.Stat): Color {
     }
 }
 
-fun parseStatToAbbr(stat: Pokemon.Stat.Stat): String {
-    return when(stat.name.lowercase()) {
+fun parseStatToAbbr(stat: Pokemon.Stat): String {
+    return when(stat.stat.name.lowercase()) {
         "hp" -> "HP"
         "attack" -> "Atk"
         "defense" -> "Def"

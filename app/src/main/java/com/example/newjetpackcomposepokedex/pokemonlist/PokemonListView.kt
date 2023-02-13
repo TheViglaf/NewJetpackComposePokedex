@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
 import coil.request.ImageRequest
 import com.example.newjetpackcomposepokedex.R
 import com.example.newjetpackcomposepokedex.data.models.PokedexListEntry
@@ -97,7 +98,7 @@ fun SearchBar(
                     isHintDisplayed = !it.isFocused && text.isEmpty()
                 }
         )
-        if(isHintDisplayed) {
+        if (isHintDisplayed) {
             Text(
                 text = hint,
                 color = Color.LightGray,
@@ -121,13 +122,13 @@ fun PokemonList(
     val isSearching by remember { viewModel.isSearching }
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
-        val itemCount = if(pokemonList.size % 2 == 0) {
+        val itemCount = if (pokemonList.size % 2 == 0) {
             pokemonList.size / 2
         } else {
             pokemonList.size / 2 + 1
         }
         items(itemCount) {
-            if(it >= itemCount - 1 && !endReached && !isLoading && !isSearching) {
+            if (it >= itemCount - 1 && !endReached && !isLoading && !isSearching) {
                 LaunchedEffect(key1 = true) {
                     viewModel.loadPokemonPaginated()
                 }
@@ -140,10 +141,10 @@ fun PokemonList(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        if(isLoading) {
+        if (isLoading) {
             CircularProgressIndicator(color = MaterialTheme.colors.primary)
         }
-        if(loadError.isNotEmpty()) {
+        if (loadError.isNotEmpty()) {
             RetrySection(error = loadError) {
                 viewModel.loadPokemonPaginated()
             }
@@ -158,8 +159,6 @@ fun PokedexEntry(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    val viewModel = get<PokemonListViewModel>()
-
     val defaultDominantColor = MaterialTheme.colors.surface
     var dominantColor by remember {
         mutableStateOf(defaultDominantColor)
@@ -196,10 +195,11 @@ fun PokedexEntry(
                     .align(CenterHorizontally)
             )
             Text(
-                    text = entry.pokemonName,
+                text = entry.pokemonName,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
-             modifier = Modifier.fillMaxWidth())
+                modifier = Modifier.fillMaxWidth()
+            )
         }
 
     }
@@ -219,7 +219,7 @@ fun PokedexRow(
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            if(entries.size >= rowIndex * 2 + 2) {
+            if (entries.size >= rowIndex * 2 + 2) {
                 PokedexEntry(
                     entry = entries[rowIndex * 2 + 1],
                     navController = navController,
