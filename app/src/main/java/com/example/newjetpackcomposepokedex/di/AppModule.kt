@@ -1,10 +1,10 @@
 package com.example.newjetpackcomposepokedex.di
 
 import com.example.newjetpackcomposepokedex.data.PokemonRepository
-import com.example.newjetpackcomposepokedex.data.PokemonRepositoryImpl
 import com.example.newjetpackcomposepokedex.data.remote.PokeApi
+import com.example.newjetpackcomposepokedex.pokemonlist.PokemonListViewModel
 import com.example.newjetpackcomposepokedex.utils.Constants.BASE_URL
-import org.koin.core.module.dsl.bind
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -19,6 +19,7 @@ val appModule = module {
             .build()
             .create(PokeApi::class.java)
     }
-    singleOf(::PokemonRepositoryImpl) {bind<PokemonRepository>()}
+    singleOf(::PokemonRepository)
+    viewModelOf(::PokemonListViewModel)
 }
 
